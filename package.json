@@ -1,0 +1,24 @@
+{
+  "name": "nanogql",
+  "description": "Tiny graphQL client library",
+  "repository": "yoshuawuyts/nanogql",
+  "version": "1.0.0",
+  "scripts": {
+    "deps": "dependency-check . && dependency-check . --extra --no-dev",
+    "start": "node .",
+    "test": "standard && npm run deps"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "dependency-check": "^2.9.1",
+    "spok": "^0.8.1",
+    "standard": "^10.0.2",
+    "tape": "^4.7.0"
+  },
+  "keywords": [
+    "graphql",
+    "small",
+    "nano"
+  ],
+  "license": "MIT"
+}
