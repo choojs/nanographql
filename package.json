@@ -2,7 +2,7 @@
   "name": "nanogql",
   "description": "Tiny graphQL client library",
   "repository": "yoshuawuyts/nanogql",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "deps": "dependency-check . && dependency-check . --extra --no-dev",
     "start": "node .",
