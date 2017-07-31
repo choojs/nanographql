@@ -48,3 +48,27 @@ tape('should have a name', function (assert) {
   })
   assert.end()
 })
+
+tape('should support expressions', function (assert) {
+  var query = gql`
+    query foo ($number_of_repos:Int!) {
+      viewer {
+        ${'na' + 'me'}
+        repositories(last: $number_of_repos) {
+          ${'nodes'} {
+            name
+          }
+        }
+      }
+    }
+  `
+
+  var variables = { number_of_repos: 3 }
+  var data = query(variables)
+  spok(assert, data, {
+    query: spok.string,
+    operationName: 'foo',
+    variables: JSON.stringify(variables)
+  })
+  assert.end()
+})
