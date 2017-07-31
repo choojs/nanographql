@@ -34,7 +34,7 @@ xhr('/query', { json: query(variables) }, function (err, res, body) {
 ### `query = gql(string)`
 Create a new graphql query function.
 
-### `data = query(data)`
+### `data = query([data])`
 Create a new query object that can be sent as `application/json` to a server.
 
 ## License
