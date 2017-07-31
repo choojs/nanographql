@@ -23,7 +23,11 @@ var query = gql`
 `
 
 var variables = { number_of_repos: 3 }
-xhr('/query', { json: query(variables) }, function (err, res))
+xhr('/query', { json: query(variables) }, function (err, res, body) {
+  if (err) throw err
+  if (body.err) throw body.err
+  console.log(body.data)
+})
 ```
 
 ## API
