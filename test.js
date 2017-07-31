@@ -20,7 +20,7 @@ tape('should create a query', function (assert) {
   var data = query(variables)
   spok(assert, data, {
     query: spok.string,
-    variables: variables
+    variables: JSON.stringify(variables)
   })
   assert.end()
 })
@@ -44,7 +44,7 @@ tape('should have a name', function (assert) {
   spok(assert, data, {
     query: spok.string,
     operationName: 'foo',
-    variables: variables
+    variables: JSON.stringify(variables)
   })
   assert.end()
 })
