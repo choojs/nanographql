@@ -3,7 +3,7 @@ module.exports = nanogql
 var getOpname = /query ([\w\d-_]+)? ?\(.*?\)? \{/
 
 function nanogql (str) {
-  str = Array.isArray(str) ? str.reduce(merge, '') : str
+  str = Array.isArray(str) ? str.join('') : str
   var name = getOpname.exec(str)
   return function (variables) {
     var data = { query: str }
@@ -11,8 +11,4 @@ function nanogql (str) {
     if (name) data.operationName = name[1]
     return data
   }
-}
-
-function merge (str, chunk) {
-  return str + chunk
 }
