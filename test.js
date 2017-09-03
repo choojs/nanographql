@@ -48,3 +48,20 @@ tape('should have a name', function (assert) {
   })
   assert.end()
 })
+
+tape('should have a name for mutations also', function (assert) {
+  var query = gql`
+    mutation CreateSomethingBig($input: Idea!) {
+      createSomething(input: $input) {
+        result
+      }
+    }
+  `
+
+  var data = query()
+  spok(assert, data, {
+    query: spok.string,
+    operationName: 'CreateSomethingBig'
+  })
+  assert.end()
+})
