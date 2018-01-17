@@ -18,7 +18,7 @@ tape('should create a query', function (assert) {
 
   var variables = { number_of_repos: 3 }
   var data = query(variables)
-  spok(assert, data, {
+  spok(assert, JSON.parse(data), {
     query: spok.string,
     variables: JSON.stringify(variables)
   })
@@ -41,7 +41,7 @@ tape('should have a name', function (assert) {
 
   var variables = { number_of_repos: 3 }
   var data = query(variables)
-  spok(assert, data, {
+  spok(assert, JSON.parse(data), {
     query: spok.string,
     operationName: 'foo',
     variables: JSON.stringify(variables)
@@ -59,7 +59,7 @@ tape('should have a name for mutations also', function (assert) {
   `
 
   var data = query()
-  spok(assert, data, {
+  spok(assert, JSON.parse(data), {
     query: spok.string,
     operationName: 'CreateSomethingBig'
   })
