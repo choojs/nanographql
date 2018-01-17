@@ -12,6 +12,6 @@ function nanographql (str) {
       var operationName = name[2]
       if (operationName) data.operationName = name[2]
     }
-    return data
+    return JSON.stringify(data)
   }
 }

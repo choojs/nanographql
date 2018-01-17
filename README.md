@@ -2,39 +2,38 @@
 [![npm version][2]][3] [![build status][4]][5]
 [![downloads][8]][9] [![js-standard-style][10]][11]
 
-Tiny graphQL client library
+Tiny graphQL client library. Does everything you need with GraphQL 15 lines of
+code.
 
 ## Usage
 ```js
 var gql = require('nanographql')
-var xhr = require('xhr')
 
 var query = gql`
-  query($number_of_repos:Int!) {
-    viewer {
-      name
-      repositories(last: $number_of_repos) {
-        nodes {
-          name
-        }
-      }
+  query($name: String!) {
+    movie (name: $name) {
+      releaseDate
     }
   }
 `
 
-var variables = { number_of_repos: 3 }
-xhr('/query', { json: query(variables) }, function (err, res, body) {
-  if (err) throw err
-  if (body.errors) throw body.errors
-  console.log(body.data)
-})
+try {
+  var res = await fetch('/query', {
+    body: query({ name: 'Back to the Future' }),
+    method: 'POST'
+  })
+  var json = res.json()
+  console.log(json)
+} catch (err) {
+  console.error(err)
+}
 ```
 
 ## API
 ### `query = gql(string)`
 Create a new graphql query function.
 
-### `data = query([data])`
+### `json = query([data])`
 Create a new query object that can be sent as `application/json` to a server.
 
 ## License
