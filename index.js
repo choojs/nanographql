@@ -8,7 +8,10 @@ function nanographql (str) {
   return function (variables) {
     var data = { query: str }
     if (variables) data.variables = JSON.stringify(variables)
-    if (name) data.operationName = name[2]
+    if (name && name.length) {
+      var operationName = name[2]
+      if (operationName) data.operationName = name[2]
+    }
     return data
   }
 }
