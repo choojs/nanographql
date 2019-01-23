@@ -1,13 +1,21 @@
-# nanographql [![stability][0]][1]
+# micrographql [![stability][0]][1]
 [![npm version][2]][3] [![build status][4]][5]
 [![downloads][8]][9] [![js-standard-style][10]][11]
 
-Tiny graphQL client library. Does everything you need with GraphQL 15 lines of
-code.
+Small graphQL client library.
+
+Its [nanographql][12] successor with some more features:
+  - convert GraphQL query schema to stringify query object
+  - support named query
+  - support pack variables to query object
+  - have options to prevent double stringify variables
+  - support fragments
+
+It may be used with HTTP or WAMP transport.
 
 ## Usage
 ```js
-var gql = require('nanographql')
+var gql = require('micrographql')
 
 var query = gql`
   query($name: String!) {
@@ -33,21 +41,22 @@ try {
 ### `query = gql(string)`
 Create a new graphql query function.
 
-### `json = query([data])`
-Create a new query object that can be sent as `application/json` to a server.
+### `processedQuery = query({/*variables*/}, variablesAsObject)`
+Create a new query object as string that can be sent as `application/json` to a server.
+
+In case of use another transport set `variablesAsObject` to `true` to prevent double stringify variables.
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
 
 [0]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
-[2]: https://img.shields.io/npm/v/nanographql.svg?style=flat-square
-[3]: https://npmjs.org/package/nanographql
-[4]: https://img.shields.io/travis/yoshuawuyts/nanographql/master.svg?style=flat-square
-[5]: https://travis-ci.org/yoshuawuyts/nanographql
-[6]: https://img.shields.io/codecov/c/github/yoshuawuyts/nanographql/master.svg?style=flat-square
-[7]: https://codecov.io/github/yoshuawuyts/nanographql
-[8]: http://img.shields.io/npm/dm/nanographql.svg?style=flat-square
-[9]: https://npmjs.org/package/nanographql
+[2]: https://img.shields.io/npm/v/micrographql.svg?style=flat-square
+[3]: https://npmjs.org/package/micrographql
+[4]: https://img.shields.io/travis/yoshuawuyts/micrographql/master.svg?style=flat-square
+[5]: https://travis-ci.org/yoshuawuyts/micrographql
+[8]: http://img.shields.io/npm/dm/micrographql.svg?style=flat-square
+[9]: https://npmjs.org/package/micrographql
 [10]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [11]: https://github.com/feross/standard
+[12]: https://npmjs.org/package/nanographql
