@@ -1,4 +1,4 @@
-# micrographql [![stability][0]][1]
+# micrographql-client [![stability][0]][1]
 [![npm version][2]][3] [![build status][4]][5]
 [![downloads][8]][9] [![js-standard-style][10]][11]
 
@@ -13,9 +13,13 @@ Its [nanographql][12] successor with some more features:
 
 It may be used with HTTP or WAMP transport.
 
+## Installation
+
+`$ npm install micrographql-client`
+
 ## Usage
 ```js
-var gql = require('micrographql')
+var gql = require('micrographql-client')
 
 var query = gql`
   query($name: String!) {
@@ -51,12 +55,12 @@ In case of use another transport set `variablesAsObject` to `true` to prevent do
 
 [0]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
-[2]: https://img.shields.io/npm/v/micrographql.svg?style=flat-square
-[3]: https://npmjs.org/package/micrographql
-[4]: https://img.shields.io/travis/Meettya/micrographql/master.svg?style=flat-square
-[5]: https://travis-ci.org/Meettya/micrographql
-[8]: http://img.shields.io/npm/dm/micrographql.svg?style=flat-square
-[9]: https://npmjs.org/package/micrographql
+[2]: https://img.shields.io/npm/v/micrographql-client.svg?style=flat-square
+[3]: https://npmjs.org/package/micrographql-client
+[4]: https://img.shields.io/travis/Meettya/micrographql-client/master.svg?style=flat-square
+[5]: https://travis-ci.org/Meettya/micrographql-client
+[8]: http://img.shields.io/npm/dm/micrographql-client.svg?style=flat-square
+[9]: https://npmjs.org/package/micrographql-client
 [10]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [11]: https://github.com/feross/standard
 [12]: https://npmjs.org/package/nanographql

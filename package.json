@@ -1,7 +1,7 @@
 {
-  "name": "micrographql",
+  "name": "micrographql-client",
   "description": "Small graphQL client library",
-  "repository": "Meettya/micrographql",
+  "repository": "Meettya/micrographql-client",
   "version": "2.1.0",
   "scripts": {
     "start": "node .",
@@ -14,7 +14,8 @@
   },
   "keywords": [
     "graphql",
-    "small"
+    "small",
+    "client"
   ],
   "license": "MIT"
 }
