@@ -1,5 +1,5 @@
 /*
- * nanographql - template literal GraphQL processor
+ * micrographql - template literal GraphQL processor
  */
 
 var nameRe = /^\s*(?:query|mutation)\s+([\w\d-_]+)\s*(?:\(.*?\))?\s*{/
@@ -19,7 +19,7 @@ function finalBuilder (str) {
   }
 }
 
-function nanographql () {
+function micrographql () {
   var args = Array.prototype.slice.call(arguments)
   var literals = args[0]
   var str = (typeof literals === 'string') ? literals : literals[0]
@@ -30,4 +30,4 @@ function nanographql () {
   return finalBuilder(str)
 }
 
-module.exports = nanographql
+module.exports = micrographql
