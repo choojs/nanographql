@@ -53,8 +53,8 @@ In case of use another transport set `variablesAsObject` to `true` to prevent do
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [2]: https://img.shields.io/npm/v/micrographql.svg?style=flat-square
 [3]: https://npmjs.org/package/micrographql
-[4]: https://img.shields.io/travis/yoshuawuyts/micrographql/master.svg?style=flat-square
-[5]: https://travis-ci.org/yoshuawuyts/micrographql
+[4]: https://img.shields.io/travis/Meettya/micrographql/master.svg?style=flat-square
+[5]: https://travis-ci.org/Meettya/micrographql
 [8]: http://img.shields.io/npm/dm/micrographql.svg?style=flat-square
 [9]: https://npmjs.org/package/micrographql
 [10]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
