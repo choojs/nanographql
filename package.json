@@ -2,7 +2,9 @@
   "name": "micrographql-client",
   "description": "Small graphQL client library",
   "repository": "Meettya/micrographql-client",
-  "version": "2.1.0",
+  "author": "Dmitrii Karpich <meettya@gmail.com>",
+  "version": "2.1.1",
+  "types": "./index.d.ts",
   "scripts": {
     "start": "node .",
     "test": "standard && node test"
