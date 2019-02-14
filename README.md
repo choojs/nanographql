@@ -39,7 +39,7 @@ Create a new query object that can be sent as `application/json` to a server.
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
 
-[0]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
+[0]: https://img.shields.io/badge/stability-stable-brightgreen.svg?style=flat-square
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [2]: https://img.shields.io/npm/v/nanographql.svg?style=flat-square
 [3]: https://npmjs.org/package/nanographql
