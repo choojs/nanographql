@@ -2,14 +2,14 @@
 [![npm version][2]][3] [![build status][4]][5]
 [![downloads][8]][9] [![js-standard-style][10]][11]
 
-Tiny graphQL client library. Does everything you need with GraphQL 15 lines of
-code.
+Tiny GraphQL client library. Compiles queries, fetches them and caches them, all
+in one tiny pacakge.
 
 ## Usage
 ```js
-var gql = require('nanographql')
+const { gql, nanographql } = require('nanographql')
 
-var query = gql`
+const Query = gql`
   query($name: String!) {
     movie (name: $name) {
       releaseDate
@@ -17,15 +17,52 @@ var query = gql`
   }
 `
 
-try {
-  var res = await fetch('/query', {
-    body: query({ name: 'Back to the Future' }),
-    method: 'POST'
-  })
-  var json = res.json()
-  console.log(json)
-} catch (err) {
-  console.error(err)
+const graphql = nanographql('/graphql')
+const { errors, data } = graphql(Query({ name: 'Back to the Future' }))
+
+```
+
+```js
+const { gql, nanographql } = require('nanographql')
+
+const { user } = gql`
+  fragment user on User {
+    id
+    name
+  }
+`
+
+const { GetUser, SaveUser } = gql`
+  query GetUser($id: ID!) {
+    user: getUser(id: $id) {
+      ...${user}
+    }
+  }
+  mutation SaveUser($id: ID!, $name: String) {
+    user: saveUser(id: $id, name: $name) {
+      ...${user}
+    }
+  }
+`
+
+const graphql = nanographql('/graphql', render)
+
+function render () {
+  const { errors, data } = graphql(GetUser({ id: 'abc123' }))
+  if (errors) return html`<p>User not found</p>`
+  if (!data) return html`<p>Loading</p>`
+
+  return html`
+    <form onsubmit=${onsubmit}>
+      Name: <input value="${data.user.name}" name="username">
+      <button>Save</button
+    </form>
+  `
+
+  function onsubmit (event) {
+    graphql(SaveUser({ id: 'abc123', name: this.username }))
+    event.preventDefault()
+  }
 }
 ```
 
