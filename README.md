@@ -82,6 +82,8 @@ individual operations. It will also mix in interpolated fragments from other
 queries.
 
 ```js
+const choo = require('choo')
+const html = require('choo/html')
 const { gql, nanographql } = require('nanographql')
 
 const { user } = gql`
@@ -104,22 +106,40 @@ const { GetUser, SaveUser } = gql`
   }
 `
 
-const graphql = nanographql('/graphql', render)
+const app = choo()
 
-function render () {
-  const { errors, data } = graphql(GetUser({ id: 'abc123' }), { key: 'abc123' })
-  if (errors) return html`<p>User not found</p>`
-  if (!data) return html`<p>Loading</p>`
+app.route('/', main)
+
+app.use(function (state, emitter) {
+  const graphql = nanographql('/graphql')
+
+  state.api = (...args) => graphql(...args, render)
+
+  function render () {
+    emitter.emit('render')
+  }
+})
+
+app.mount(document.body)
+
+function main (state, emit) {
+  const { api } = state
+  const { errors, data } = api(GetUser({ id: 'abc123' }), { key: 'abc123' })
+
+  if (errors) return html`<body><p>User not found</p><body>`
+  if (!data) return html`<body><p>Loading</p><body>`
 
   return html`
-    <form onsubmit=${onsubmit}>
-      Name: <input value="${data.user.name}" name="username">
-      <button>Save</button>
-    </form>
+    <body>
+      <form onsubmit=${onsubmit}>
+        Name: <input value="${data.user.name}" name="username">
+        <button>Save</button>
+      </form>
+    </body>
   `
 
   function onsubmit (event) {
-    graphql(SaveUser({ id: 'abc123', name: this.username.value }), {
+    api(SaveUser({ id: 'abc123', name: this.username.value }), {
       key: 'abc123',
       mutate (cached) {
         const user = { ...cached.data.user, name }
