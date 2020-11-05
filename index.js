@@ -45,7 +45,11 @@ function nanographql (url, opts = {}) {
   if (!cache) cache = new Map()
   if (typeof fetch !== 'function') {
     fetch = function (url, opts, cb) {
-      window.fetch(url, opts).then((res) => res.json()).then((res) => cb(null, res), cb)
+      window.fetch(url, opts).then(function (res) {
+        return res.json()
+      }).then(function (res) {
+        return cb(null, res)
+      }, cb)
     }
   }
 
@@ -60,8 +64,10 @@ function nanographql (url, opts = {}) {
     const querystring = operation.toString()
     let href = url.toString()
 
-    let key = opts.key || (variables ? serialize(variables) : querystring)
-    if (typeof key === 'function') key = opts.key(variables)
+    let key = opts.key
+    if (!key) key = variables ? variables.id || serialize(variables) : querystring
+    else if (typeof key === 'function') key = opts.key(variables)
+
     let useCache = !body && type !== 'mutation' && !bypass.includes(opts.cache)
     let store = cache.get(operation.key)
     if (!store) cache.set(operation.key, store = {})
@@ -80,7 +86,7 @@ function nanographql (url, opts = {}) {
       }
     } else {
       let [domainpath, query] = href.split('?')
-      query = query ? query + `&${querystring}` : querystring
+      query = query ? `${query}&${querystring}` : querystring
       href = `${domainpath}?${query}`
     }
 
@@ -140,7 +146,9 @@ function parse (strings, values) {
   if (last) last.query += template.substring(last.index)
 
   // Inject fragment into operation query
-  const fragments = operations.filter((operation) => operation.type === 'fragment')
+  const fragments = operations.filter(function (operation) {
+    return operation.type === 'fragment'
+  })
   if (fragments.length) {
     for (const operation of operations) {
       if (operation.type === 'fragment') continue
