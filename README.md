@@ -31,7 +31,7 @@ Create a new operation object that holds all data necessary to execute the query
 against an endpoint. An operation can be stringified to a query (`toString`),
 serialized to a plain object (`toJSON`) or iterated over.
 
-### `cache = nanographql(string[, opts])`
+### `cache = nanographql(url[, opts])`
 Create a managed cache which fetches data as it is requested.
 
 #### Options
