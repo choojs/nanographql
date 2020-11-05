@@ -243,7 +243,7 @@ tape('fetch handler', function (t) {
       t.ok(opts.body, 'body is set')
       const body = JSON.parse(opts.body)
       t.deepEqual(body, operation.toJSON(), 'operation is encoded as json body')
-      t.equal(opts.headers?.['Content-Type'], 'application/json', 'header is set to json')
+      t.equal(opts.headers['Content-Type'], 'application/json', 'header is set to json')
       t.equal(opts.method, 'POST', 'method is POST')
       cb(null)
     }
@@ -269,7 +269,7 @@ tape('fetch handler', function (t) {
       const body = JSON.parse(opts.body)
       t.equal(url, '/graphql', 'url is untouched')
       t.deepEqual(body, operation.toJSON(), 'payload is json encoded')
-      t.equal(opts.headers?.['Content-Type'], 'application/json', 'header is set to json')
+      t.equal(opts.headers['Content-Type'], 'application/json', 'header is set to json')
       t.equal(opts.method, 'POST', 'method is POST')
       cb(null)
     }
@@ -299,7 +299,7 @@ tape('fetch handler', function (t) {
 
     function fetch (url, opts, cb) {
       t.equal(opts.body, body, 'body is preserved')
-      t.equal(opts.headers?.['Content-Type'], contentType, 'content type is preserved')
+      t.equal(opts.headers['Content-Type'], contentType, 'content type is preserved')
       t.equal(opts.method, method, 'method is preserved')
       cb(null)
     }
@@ -462,7 +462,7 @@ tape('cache handler', function (t) {
       yield
       graphql(Mutation({ value: 'bin' }, {
         key (res) {
-          return res?.data.key
+          return res && res.data.key
         }
       }))
       let bar = graphql(Query({ value: 'bar' }), { key: 'baz' })
