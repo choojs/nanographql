@@ -490,7 +490,24 @@ tape('cache handler', function (t) {
     }
   })
 
-  t.test('respect cache option', function (t) {
+  t.test('respect only-if-cached option', function (t) {
+    const graphql = nanographql('/graphql', { fetch })
+    const { Query } = gql`
+      query Query {
+        hello
+      }
+    `
+
+    const res = graphql(Query(), { cache: 'only-if-cached' })
+    t.deepEqual(res, {}, 'empty result when not cached')
+    t.end()
+
+    function fetch (url, opts, cb) {
+      t.fail('should not fetch')
+    }
+  })
+
+  t.test('respect cache bypass option', function (t) {
     t.plan(12)
 
     const graphql = nanographql('/graphql', { fetch })
@@ -506,7 +523,6 @@ tape('cache handler', function (t) {
 
     function * init (index) {
       const cache = bypass[index]
-
       let res = graphql(Query(), { cache, key: cache })
       t.deepEqual(res, {}, `empty result while loading using ${cache}`)
       yield

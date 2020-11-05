@@ -75,7 +75,10 @@ function nanographql (url, opts = {}) {
 
     if (opts.mutate || useCache) {
       if (opts.mutate) cached = store[key] = opts.mutate(cached)
-      if (cached != null && useCache) return cached
+      if (useCache) {
+        if (cached != null) return cached
+        if (opts.cache === 'only-if-cached') return {}
+      }
     }
 
     if (body || type === 'mutation' || (href + querystring).length >= 2000) {
