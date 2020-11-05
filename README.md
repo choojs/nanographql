@@ -54,7 +54,7 @@ also used to determine when to use the cache and how to format the request.
   of the values `no-store`, `reload`, `no-cache`, `default` will cause
   nanographql to bypass the cache and call the fetch implementation. The value
   `no-store` will also prevent the response from being cached locally. See
-  [cache][14] for more details on cache mode.
+  [cache mode][14] for more details.
 - **`body`:** If a body is defined, nanographql will make no changes to headers
   or the body itself. You'll have to append the operation to the body yourself.
 - **`method`:** If the operation is a `mutation` or if the stringified
