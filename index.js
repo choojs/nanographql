@@ -65,7 +65,7 @@ function nanographql (url, opts = {}) {
     let href = url.toString()
 
     let key = opts.key
-    if (!key) key = variables ? variables.id || serialize(variables) : querystring
+    if (!key) key = variables ? serialize(variables) : querystring
     else if (typeof key === 'function') key = opts.key(variables)
 
     let useCache = !body && type !== 'mutation' && !bypass.includes(opts.cache)

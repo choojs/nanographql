@@ -65,9 +65,8 @@ also used to determine when to use the cache and how to format the request.
   Can be a string or a function. Functions will be called with the variables and
   the cached data, if there is any. This can be used to determine the key of
   e.g. a mutation where the key is not known untill a response is retrieved. The
-  default is the `id` variable, if deined, otherwise all variables as a
-  serialized string, or a stringified representation of the query if no
-  variables are provided.
+  default is the variables as a serialized string, or a stringified
+  representation of the query if no variables are provided.
 - **`parse(response, cached)`:** Parse the incoming data before comitting to the
   cache.
 - **`mutate(cached)`:** Mutate the cached data prior to reading from cache or
@@ -107,7 +106,7 @@ const { GetUser, SaveUser } = gql`
 const graphql = nanographql('/graphql', render)
 
 function render () {
-  const { errors, data } = graphql(GetUser({ id: 'abc123' }))
+  const { errors, data } = graphql(GetUser({ id: 'abc123' }), { key: 'id' })
   if (errors) return html`<p>User not found</p>`
   if (!data) return html`<p>Loading</p>`
 
@@ -119,7 +118,13 @@ function render () {
   `
 
   function onsubmit (event) {
-    graphql(SaveUser({ id: 'abc123', name: this.username.value }))
+    graphql(SaveUser({ id: 'abc123', name: this.username.value }), {
+      key: 'id',
+      mutate (cached) {
+        const user = { ...data.user, name }
+        return { data: { user } }
+      }
+    })
     event.preventDefault()
   }
 }
