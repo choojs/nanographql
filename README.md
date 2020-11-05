@@ -122,7 +122,7 @@ function render () {
     graphql(SaveUser({ id: 'abc123', name: this.username.value }), {
       key: 'abc123',
       mutate (cached) {
-        const user = { ...data.user, name }
+        const user = { ...cached.data.user, name }
         return { data: { user } }
       }
     })
