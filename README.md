@@ -36,13 +36,16 @@ Create a managed cache which fetches data as it is requested.
 
 #### Options
 - **`cache`:** a custom cache store. Should implement `get` and `set` methods.
-  *Default: `new Map()`*.
-- **`fetch`:** a custom [`fetch`][12] implementation.
-  *Default: `window.fetch`*.
+  The default is a [`Map`][15].
+- **`fetch`:** a custom [`fetch`][12] implementation. The `fetch` option should
+  be a function which takes three arguments, `url`, `opts` and a callback
+  function. The callback function should be called whenever there is an error or
+  new data available. The default is an implementation of `window.fetch`.
 
-### `result = cache(operation[, opts])`
-Query the cache and fetch query if necessary. The arguments match that of
-[`fetch`][13] with a couple extra options.
+### `result = cache(operation[, opts][, cb])`
+Query the cache and fetch query if necessary. The options match that of
+[`fetch`][13] with a couple extra options. The callback will be called whenever
+an error or new data becomes available.
 
 #### Options
 The options are forwarded to the [`fetch`][12] implementation but a few are
@@ -170,3 +173,4 @@ function main (state, emit) {
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
+[15]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
