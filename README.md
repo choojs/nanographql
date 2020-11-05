@@ -42,7 +42,7 @@ Create a managed cache which fetches data as it is requested.
 
 ### `result = cache(operation[, opts])`
 Query the cache and fetch query if necessary. The arguments match that of
-[`fetch`][12] with a couple extra options.
+[`fetch`][13] with a couple extra options.
 
 #### Options
 The options are forwarded to the [`fetch`][12] implementation but a few are
@@ -52,8 +52,9 @@ also used to determine when to use the cache and how to format the request.
 - **`cache`:** The default behavior of nanographql mimics that of `force-cache`
   as it will always try and read from the cache unless specified otherwise. Any
   of the values `no-store`, `reload`, `no-cache`, `default` will cause
-  nanographql to bypass the cache and call the fetch implmentation. The value
-  `no-store` will also prevent the response from being cached locally.
+  nanographql to bypass the cache and call the fetch implementation. The value
+  `no-store` will also prevent the response from being cached locally. See
+  [cache][14] for more details on cache mode.
 - **`body`:** If a body is defined, nanographql will make no changes to headers
   or the body itself. You'll have to append the operation to the body yourself.
 - **`method`:** If the operation is a `mutation` or if the stringified
@@ -146,4 +147,6 @@ function render () {
 [9]: https://npmjs.org/package/nanographql
 [10]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [11]: https://github.com/feross/standard
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
+[13]: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters
+[14]: https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
