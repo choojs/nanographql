@@ -62,23 +62,23 @@ also used to determine when to use the cache and how to format the request.
   be set to `POST`, unless specified otherwise.
 
 ##### Extra options
-- **`key|key(variables, cached)`:** A unique identifier for the requested data.
-  Can be a string or a function. Functions will be called with the variables and
-  the cached data, if there is any. This can be used to determine the key of
-  e.g. a mutation where the key is not known untill a response is retrieved. The
-  default is the variables as a serialized string, or a stringified
-  representation of the query if no variables are provided.
-- **`parse(response, cached)`:** Parse the incoming data before comitting to the
-  cache.
+- **`key|key(variables[, cached])`:** A unique identifier for the requested
+  data. Can be a string or a function. Functions will be called with the
+  variables and the cached data, if there is any. This can be used to determine
+  the key of e.g. a mutation where the key is not known untill a response is
+  retrieved. The default is the variables as a serialized string, or a
+  stringified representation of the query if no variables are provided.
+- **`parse(response[, cached])`:** Parse the incoming data before comitting to
+  the cache.
 - **`mutate(cached)`:** Mutate the cached data prior to reading from cache or
   fetching data. This is useful for e.g. immedately updating the UI while
   submitting changes to the back end.
 
-## Advanced usage
+## Expressions and Operations
 One of the benefits of GraphQL is the strucuted format of the queries. When
 passing a query to the `gql` tag, nanographql will parse the string identifying
 individual queries, mutations, subscritions and fragments and expose these as
-individual functions. It will also mix in interpolated fragments from other
+individual operations. It will also mix in interpolated fragments from other
 queries.
 
 ```js
@@ -107,20 +107,20 @@ const { GetUser, SaveUser } = gql`
 const graphql = nanographql('/graphql', render)
 
 function render () {
-  const { errors, data } = graphql(GetUser({ id: 'abc123' }), { key: 'id' })
+  const { errors, data } = graphql(GetUser({ id: 'abc123' }), { key: 'abc123' })
   if (errors) return html`<p>User not found</p>`
   if (!data) return html`<p>Loading</p>`
 
   return html`
     <form onsubmit=${onsubmit}>
       Name: <input value="${data.user.name}" name="username">
-      <button>Save</button
+      <button>Save</button>
     </form>
   `
 
   function onsubmit (event) {
     graphql(SaveUser({ id: 'abc123', name: this.username.value }), {
-      key: 'id',
+      key: 'abc123',
       mutate (cached) {
         const user = { ...data.user, name }
         return { data: { user } }
