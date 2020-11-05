@@ -37,15 +37,15 @@ Create a managed cache which fetches data as it is requested.
 #### Options
 - **`cache`:** a custom cache store. Should implement `get` and `set` methods.
   *Default: `new Map()`*.
-- **`fetch`:** a custom [`fetch`]([12]) implementation.
+- **`fetch`:** a custom [`fetch`][12] implementation.
   *Default: `window.fetch`*.
 
 ### `result = cache(operation[, opts])`
 Query the cache and fetch query if necessary. The arguments match that of
-[`fetch`]([12]) with a couple extra options.
+[`fetch`][12] with a couple extra options.
 
 #### Options
-The options are forwarded to the [`fetch`]([12]) implementation but a few are
+The options are forwarded to the [`fetch`][12] implementation but a few are
 also used to determine when to use the cache and how to format the request.
 
 ##### Default options
