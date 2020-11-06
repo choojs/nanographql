@@ -111,9 +111,11 @@ const { GetUser, SaveUser } = gql`
 
 const app = choo()
 
+app.use(store)
 app.route('/', main)
+app.mount(document.body)
 
-app.use(function (state, emitter) {
+function store (state, emitter) {
   const graphql = nanographql('/graphql')
 
   state.api = (...args) => graphql(...args, render)
@@ -121,9 +123,7 @@ app.use(function (state, emitter) {
   function render () {
     emitter.emit('render')
   }
-})
-
-app.mount(document.body)
+}
 
 function main (state, emit) {
   const { api } = state
