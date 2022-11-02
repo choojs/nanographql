@@ -1,7 +1,5 @@
-node_modules/
-coverage/
-tmp/
-dist/
-npm-debug.log*
+.dccache
 .DS_Store
-.nyc_output
+coverage
+dist
+node_modules

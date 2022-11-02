@@ -2,12 +2,12 @@
  * micrographql - template literal GraphQL processor
  */
 
-var nameRe = /^\s*(?:query|mutation)\s+([\w\d-_]+)\s*(?:\(.*?\))?\s*{/
+const nameRe = /^\s*(?:query|mutation)\s+([\w\d-_]+)\s*(?:\(.*?\))?\s*{/
 
 function finalBuilder (str) {
   return function (variables, variablesAsObject) {
-    var data = { query: str }
-    var matched = nameRe.exec(str)
+    const data = { query: str }
+    const matched = nameRe.exec(str)
 
     if (variables) {
       data.variables = variablesAsObject ? variables : JSON.stringify(variables)
@@ -20,11 +20,11 @@ function finalBuilder (str) {
 }
 
 function micrographql () {
-  var args = Array.prototype.slice.call(arguments)
-  var literals = args[0]
-  var str = (typeof literals === 'string') ? literals : literals[0]
+  const args = Array.prototype.slice.call(arguments)
+  const literals = args[0]
+  let str = (typeof literals === 'string') ? literals : literals[0]
 
-  for (var i = 1; i < args.length; i++) {
+  for (let i = 1; i < args.length; i++) {
     str += args[i] + literals[i]
   }
   return finalBuilder(str)

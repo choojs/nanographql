@@ -1,8 +1,8 @@
-var tape = require('tape')
-var gql = require('./')
+const tape = require('tape')
+const gql = require('./')
 
 tape('should create a query', function (test) {
-  var query = gql`
+  const query = gql`
     query($number_of_repos:Int!) {
       viewer {
         name
@@ -14,9 +14,9 @@ tape('should create a query', function (test) {
       }
     }
   `
-  var variables = { number_of_repos: 3 }
-  var data = query(variables)
-  var parsedData = JSON.parse(data)
+  const variables = { number_of_repos: 3 }
+  const data = query(variables)
+  const parsedData = JSON.parse(data)
 
   test.plan(2)
   test.ok(typeof parsedData.query === 'string', 'query should be a string')
@@ -25,7 +25,7 @@ tape('should create a query', function (test) {
 })
 
 tape('should have a name', function (test) {
-  var query = gql`
+  const query = gql`
     query foo ($number_of_repos:Int!) {
       viewer {
         name
@@ -37,9 +37,9 @@ tape('should have a name', function (test) {
       }
     }
   `
-  var variables = { number_of_repos: 3 }
-  var data = query(variables)
-  var parsedData = JSON.parse(data)
+  const variables = { number_of_repos: 3 }
+  const data = query(variables)
+  const parsedData = JSON.parse(data)
 
   test.plan(3)
   test.ok(typeof parsedData.query === 'string', 'query should be a string')
@@ -49,15 +49,15 @@ tape('should have a name', function (test) {
 })
 
 tape('should have a name for mutations also', function (test) {
-  var query = gql`
+  const query = gql`
     mutation CreateSomethingBig($input: Idea!) {
       createSomething(input: $input) {
         result
       }
     }
   `
-  var data = query()
-  var parsedData = JSON.parse(data)
+  const data = query()
+  const parsedData = JSON.parse(data)
 
   test.plan(2)
   test.ok(typeof parsedData.query === 'string', 'query should be a string')
@@ -66,7 +66,7 @@ tape('should have a name for mutations also', function (test) {
 })
 
 tape('should have a name without args', function (test) {
-  var query = gql`
+  const query = gql`
     query foo {
       viewer {
         name
@@ -78,8 +78,8 @@ tape('should have a name without args', function (test) {
       }
     }
   `
-  var data = query()
-  var parsedData = JSON.parse(data)
+  const data = query()
+  const parsedData = JSON.parse(data)
 
   test.plan(2)
   test.ok(typeof parsedData.query === 'string', 'query should be a string')
@@ -88,14 +88,14 @@ tape('should have a name without args', function (test) {
 })
 
 tape('should support a fragment', function (test) {
-  var fragment = `
+  const fragment = `
     fragment RepositoryFragment on Repository {
       nodes {
         name
       }
     }
   `
-  var query = gql`
+  const query = gql`
     query foo {
       viewer {
         name
@@ -107,7 +107,7 @@ tape('should support a fragment', function (test) {
     ${fragment}
   `
 
-  var data = query()
+  const data = query()
   test.plan(2)
   test.ok(data.indexOf('...RepositoryFragment') !== -1, 'fragment link exists')
   test.ok(data.indexOf('fragment RepositoryFragment on Repository') !== -1, 'fragment body exists')
@@ -115,7 +115,7 @@ tape('should support a fragment', function (test) {
 })
 
 tape('should not stringify variables', function (test) {
-  var query = gql`
+  const query = gql`
     query($number_of_repos:Int!) {
       viewer {
         name
@@ -127,9 +127,9 @@ tape('should not stringify variables', function (test) {
       }
     }
   `
-  var variables = { number_of_repos: 3 }
-  var data = query(variables, true)
-  var parsedData = JSON.parse(data)
+  const variables = { number_of_repos: 3 }
+  const data = query(variables, true)
+  const parsedData = JSON.parse(data)
 
   test.plan(2)
   test.ok(typeof parsedData.query === 'string', 'query should be a string')

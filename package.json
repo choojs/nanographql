@@ -3,16 +3,15 @@
   "description": "Small graphQL client library",
   "repository": "Meettya/micrographql-client",
   "author": "Dmitrii Karpich <meettya@gmail.com>",
-  "version": "2.1.1",
+  "version": "2.1.3",
   "types": "./index.d.ts",
   "scripts": {
-    "start": "node .",
     "test": "standard && node test"
   },
   "dependencies": {},
   "devDependencies": {
-    "standard": "^12.0.1",
-    "tape": "^4.9.2"
+    "standard": "latest",
+    "tape": "latest"
   },
   "keywords": [
     "graphql",
